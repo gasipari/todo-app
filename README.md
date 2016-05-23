@@ -1,2 +1,2 @@
-# boilerplate-app
-boilerplate-app
+# todo-app
+todo-app
