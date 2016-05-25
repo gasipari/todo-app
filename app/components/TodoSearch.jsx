@@ -15,8 +15,10 @@ const TodoSearch = React.createClass({
           <input type="search" ref="searchText" placeholder="Search tasks" onChange={this.handleSearch}/>
         </div>
         <div>
+          <label>
           <input type="checkbox" ref="showCompleted" onChange={this.handleSearch} />
           Show completed tasks
+        </label>
         </div>
       </div>
     )
