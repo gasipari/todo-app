@@ -1,5 +1,4 @@
 import expect from 'expect';
-
 import TodoAPI from 'TodoAPI';
 
 describe('TodoAPI', () => {

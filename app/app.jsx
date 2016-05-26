@@ -12,10 +12,6 @@ store.subscribe(() => {
   console.log('New state', store.getState());
 })
 
-store.dispatch(addTodo('Check the mail'));
-store.dispatch(setSearchText('mail'));
-store.dispatch(toggleShowCompleted());
-
 // Load foundation
 $(document).foundation();
 
