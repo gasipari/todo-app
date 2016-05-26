@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Provider} from 'react-redux';
 import expect from 'expect';
 import $ from 'jQuery';
 import TestUtils from 'react-addons-test-utils';
 
-import TodoList from 'TodoList';
-import Todo from 'Todo';
+//let configureStore = require('configureStore');
+import {configure} from 'configureStore';
+import ConnectedTodoList, {TodoList} from 'TodoList';
+import ConnectedTodo, {Todo} from 'Todo';
 
 describe('TodoList', () => {
   it('should exist', () => {
@@ -16,16 +19,31 @@ describe('TodoList', () => {
     let todos = [
       {
         id: 1,
-        text: 'Go to the gym'
+        text: 'Go to the gym',
+        completed: false,
+        completedAt: undefined,
+        createdAt: 500
       },
       {
         id: 2,
-        text: 'Call Joe'
+        text: 'Call Joe',
+        completed: false,
+        completedAt: undefined,
+        createdAt: 501
       }
     ];
-    let todoList = TestUtils.renderIntoDocument(<TodoList todos={todos} />);
+    var store = configure({
+      todos
+    })
+    let provider = TestUtils.renderIntoDocument(
+      <Provider store={store}>
+        <ConnectedTodoList />
+      </Provider>
+    )
+
+    let todoList = TestUtils.scryRenderedComponentsWithType(provider, ConnectedTodoList)[0];
     // Finds all instances of components with type of Todo class
-    let todosComponents = TestUtils.scryRenderedComponentsWithType(todoList, Todo);
+    let todosComponents = TestUtils.scryRenderedComponentsWithType(todoList, ConnectedTodo);
 
     expect(todosComponents.lenght).toBe(todos.lenght);
   });
