@@ -1,6 +1,5 @@
 import expect from 'expect';
-//import actions from 'actions';
-var actions = require('actions');
+import {setSearchText, addTodo, toggleShowCompleted, toggleTodo} from 'actions';
 
 describe('Action', () => {
   it('should generate search text action', () => {
@@ -8,7 +7,7 @@ describe('Action', () => {
       type: 'SET_SEARCH_TEXT',
       searchText: 'Some search text'
     };
-    let result = actions.setSearchText(action.searchText);
+    let result = setSearchText(action.searchText);
 
     expect(result).toEqual(action);
   });
@@ -18,7 +17,7 @@ describe('Action', () => {
       type: 'ADD_TODO',
       text: 'Some task'
     };
-    let result = actions.addTodo(action.text);
+    let result = addTodo(action.text);
 
     expect(result).toEqual(action);
   });
@@ -27,7 +26,7 @@ describe('Action', () => {
     let action = {
       type: 'TOGGLE_SHOW_COMPLETED',
     };
-    let result = actions.toggleShowCompleted();
+    let result = toggleShowCompleted();
 
     expect(result).toEqual(action);
   });
@@ -37,7 +36,7 @@ describe('Action', () => {
       type: 'TOGGLE_TODO',
       id: '999'
     };
-    let result = actions.toggleTodo(action.id);
+    let result = toggleTodo(action.id);
 
     expect(result).toEqual(action);
   });
