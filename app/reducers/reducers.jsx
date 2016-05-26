@@ -1,3 +1,5 @@
+import moment from 'moment';
+import uuid from 'node-uuid';
 //
 export let searchTextReducer = (state = '', action) => {
   switch (action.type) {
@@ -16,3 +18,34 @@ export let showCompletedReducer = (state = false, action) => {
       return state;
   };
 };
+
+export let todosReducer = (state = [], action) => {
+  switch (action.type) {
+    case 'ADD_TODO':
+      return [
+        ...state,
+        {
+          id: uuid(),
+          text: action.text,
+          completed: false,
+          createdAt: moment().unix(),
+          completedAt: undefined
+        }
+      ];
+    case 'TOGGLE_TODO':
+        return state.map((todo) => {
+          if (todo.id === action.id) {
+            let nextCompleted =! todo.completed;
+
+            return {
+              ...todo,
+              completed: nextCompleted,
+              completedAt: nextCompleted ? moment().unix() : undefined
+            };
+          };
+        });
+
+    default:
+      return state;
+  }
+}
